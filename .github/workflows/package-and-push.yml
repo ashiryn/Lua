@@ -1,0 +1,42 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: NuGet Generation
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [ "main" ]
+
+env:
+  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  REPOSITORY_URL:  https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+  PROJECT_NAME: Lua
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    name: Update NuGet package
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x      
+        
+    - name: Add GitHub NuGet Source
+      id: add-nuget-source
+      run: |
+        dotnet nuget update source 'FluffyVoid - Github' -u Build -p ${{ env.NUGET_AUTH_TOKEN }} --store-password-in-clear-text
+    
+    - name: Build and Package project
+      run: |
+        cd ${{ env.PROJECT_NAME }}
+        dotnet pack -c Release -o out
+        
+    - name: Push generated package to GitHub registry
+      run: dotnet nuget push ./${{ env.PROJECT_NAME }}/out/*.nupkg -k ${{ env.NUGET_AUTH_TOKEN }} -s ${{ env.REPOSITORY_URL }} --skip-duplicate --no-symbols

@@ -1,0 +1,41 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testin
+name: Build and Test
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: read
+      
+    name: Build and Test solution
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    
+    - name: Add GitHub NuGet Source
+      id: add-nuget-source
+      run: |
+        dotnet nuget update source 'FluffyVoid - Github' -u Build -p ${{ env.NUGET_AUTH_TOKEN }} --store-password-in-clear-text
+        
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --no-restore
+    
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
