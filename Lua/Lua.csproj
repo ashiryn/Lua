@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latestmajor</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -13,24 +13,30 @@
         <Description>C# lua manager that utilizes Moonsharp to process and manage lua scripts.</Description>
         <Company>FluffyVoid</Company>
         <Product>FluffyVoid.Lua</Product>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <FileVersion>1.0.1</FileVersion>
+		<Version>1.0.1</Version>
         <RepositoryUrl>https://github.com/ashiryn/Lua</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <DocumentationFile>bin\Debug\Lua.xml</DocumentationFile>
+        <DocumentationFile>bin/Debug/FluffyVoid.Lua.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DocumentationFile>bin\Release\Lua.xml</DocumentationFile>
+        <DocumentationFile>bin/Release/FluffyVoid.Lua.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="fluffyvoid.fileutilities" Version="1.0.1"/>
-        <PackageReference Include="FluffyVoid.Logging" Version="1.0.0"/>
+        <PackageReference Include="fluffyvoid.fileutilities" Version="1.0.3" />
+        <PackageReference Include="FluffyVoid.Logging" Version="1.0.1" />
         <PackageReference Include="MoonSharp" Version="2.0.0"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>
-
+	<ItemGroup>
+        <None Include="bin/$(Configuration)/FluffyVoid.Lua.xml" Pack="true">
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <PackageFlatten>true</PackageFlatten>
+        </None>
+	</ItemGroup>
 </Project>
