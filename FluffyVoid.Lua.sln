@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lua", "Lua\Lua.csproj", "{657AC6CF-712A-46FC-81C5-0257BB021F3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluffyVoid.Lua", "FluffyVoid.Lua\FluffyVoid.Lua.csproj", "{657AC6CF-712A-46FC-81C5-0257BB021F3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

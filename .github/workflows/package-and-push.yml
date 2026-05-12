@@ -11,7 +11,7 @@ on:
 env:
   NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   REPOSITORY_URL:  https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-  PROJECT_NAME: Lua
+  PROJECT_NAME: FluffyVoid.Lua
 jobs:
   build:
     runs-on: ubuntu-latest
