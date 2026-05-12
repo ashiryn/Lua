@@ -28,7 +28,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluffyVoid.FileUtilities" Version="1.0.4" />
+        <PackageReference Include="FluffyVoid.FileUtilities" Version="1.0.5" />
         <PackageReference Include="FluffyVoid.Logging" Version="1.0.3" />
         <PackageReference Include="MoonSharp" Version="2.0.0"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.4"/>
